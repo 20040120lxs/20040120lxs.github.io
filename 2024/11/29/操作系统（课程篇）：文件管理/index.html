@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>操作系统（课程篇）：文件管理 | lxs</title><meta name="author" content="lxs"><meta name="copyright" content="lxs"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="From N to S">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>操作系统（课程篇）：文件管理 | lxs</title><meta name="author" content="lxs"><meta name="copyright" content="lxs"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="计算机为什么需要文件？  保存大量信息 永久保存信息 共享  文件系统的功能？  管理磁盘等辅存，实施分配与回收 建立映射关系 支持共享和保护  文件系统的特点？  友好的用户接口 按名存取文件 多用户&#x2F;进程共享 存储大量信息  文件的分类？  按性质和用途 系统文件 允许通过系统调用执行 不允许读写和修改   库文件 允许读取、执行 不允许修改   用户文件 文件所有者及其授权用户使用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="操作系统（课程篇）：文件管理">
 <meta property="og:url" content="https://20040120lxs.github.io/2024/11/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%AF%BE%E7%A8%8B%E7%AF%87%EF%BC%89%EF%BC%9A%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/index.html">
 <meta property="og:site_name" content="lxs">
-<meta property="og:description" content="From N to S">
+<meta property="og:description" content="计算机为什么需要文件？  保存大量信息 永久保存信息 共享  文件系统的功能？  管理磁盘等辅存，实施分配与回收 建立映射关系 支持共享和保护  文件系统的特点？  友好的用户接口 按名存取文件 多用户&#x2F;进程共享 存储大量信息  文件的分类？  按性质和用途 系统文件 允许通过系统调用执行 不允许读写和修改   库文件 允许读取、执行 不允许修改   用户文件 文件所有者及其授权用户使用">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://20040120lxs.github.io/img/%E5%A4%B4%E5%83%8F.png">
 <meta property="article:published_time" content="2024-11-29T12:29:21.000Z">
-<meta property="article:modified_time" content="2024-11-29T12:29:21.471Z">
+<meta property="article:modified_time" content="2024-12-02T12:20:00.085Z">
 <meta property="article:author" content="lxs">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://20040120lxs.github.io/img/%E5%A4%B4%E5%83%8F.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://20040120lxs.github.io/2024/11/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%AF%BE%E7%A8%8B%E7%AF%87%EF%BC%89%EF%BC%9A%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
@@ -166,4 +166,159 @@
     btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
     btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
   }
-})()</script><div id="web_bg" style="background-image: url(/img/background.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/%E5%A4%B4%E5%83%8F.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/top_img/爱的迫降.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"></a><a class="nav-page-title" href="/"><span class="site-name">操作系统（课程篇）：文件管理</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">操作系统（课程篇）：文件管理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-11-29T12:29:21.000Z" title="发表于 2024-11-29 20:29:21">2024-11-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-11-29T12:29:21.471Z" title="更新于 2024-11-29 20:29:21">2024-11-29</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">0</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://20040120lxs.github.io">lxs</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://20040120lxs.github.io/2024/11/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%AF%BE%E7%A8%8B%E7%AF%87%EF%BC%89%EF%BC%9A%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">https://20040120lxs.github.io/2024/11/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%AF%BE%E7%A8%8B%E7%AF%87%EF%BC%89%EF%BC%9A%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://20040120lxs.github.io" target="_blank">lxs</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/%E5%A4%B4%E5%83%8F.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related  no-desc" href="/2024/11/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%AF%BE%E7%A8%8B%E7%AF%87%EF%BC%89%EF%BC%9A%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/" title="操作系统（课程篇）：设备管理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">操作系统（课程篇）：设备管理</div></div></div></a><a class="pagination-related  no-desc" href="/2024/11/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%AF%BE%E7%A8%8B%E7%AF%87%EF%BC%89%EF%BC%9A%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" title="操作系统（课程篇）：内存管理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">操作系统（课程篇）：内存管理</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/%E5%A4%B4%E5%83%8F.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">lxs</div><div class="author-info-description">From N to S</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/20040120lxs"><i class="fab fa-github"></i><span>My Github</span></a></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/29/Hexo%E9%83%A8%E7%BD%B2%E8%BD%BB%E9%87%8F%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="Hexo部署轻量云服务器">Hexo部署轻量云服务器</a><time datetime="2024-11-29T13:54:43.000Z" title="发表于 2024-11-29 21:54:43">2024-11-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%AF%BE%E7%A8%8B%E7%AF%87%EF%BC%89%EF%BC%9A%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/" title="操作系统（课程篇）：设备管理">操作系统（课程篇）：设备管理</a><time datetime="2024-11-29T12:29:26.000Z" title="发表于 2024-11-29 20:29:26">2024-11-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%AF%BE%E7%A8%8B%E7%AF%87%EF%BC%89%EF%BC%9A%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" title="操作系统（课程篇）：文件管理">操作系统（课程篇）：文件管理</a><time datetime="2024-11-29T12:29:21.000Z" title="发表于 2024-11-29 20:29:21">2024-11-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%AF%BE%E7%A8%8B%E7%AF%87%EF%BC%89%EF%BC%9A%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" title="操作系统（课程篇）：内存管理">操作系统（课程篇）：内存管理</a><time datetime="2024-11-29T12:29:10.000Z" title="发表于 2024-11-29 20:29:10">2024-11-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%AF%BE%E7%A8%8B%E7%AF%87%EF%BC%89%EF%BC%9A%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/" title="操作系统（课程篇）：进程管理">操作系统（课程篇）：进程管理</a><time datetime="2024-11-29T12:28:55.000Z" title="发表于 2024-11-29 20:28:55">2024-11-29</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent;"><div id="footer-wrap"><div class="copyright">&copy;2024 By lxs</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">The End</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+})()</script><div id="web_bg" style="background-image: url(/img/background.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/%E5%A4%B4%E5%83%8F.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/top_img/爱的迫降.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"></a><a class="nav-page-title" href="/"><span class="site-name">操作系统（课程篇）：文件管理</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">操作系统（课程篇）：文件管理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-11-29T12:29:21.000Z" title="发表于 2024-11-29 20:29:21">2024-11-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-12-02T12:20:00.085Z" title="更新于 2024-12-02 20:20:00">2024-12-02</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">532</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>计算机为什么需要文件？</p>
+<ul>
+<li>保存大量信息</li>
+<li>永久保存信息</li>
+<li>共享</li>
+</ul>
+<p>文件系统的功能？</p>
+<ul>
+<li>管理磁盘等辅存，实施分配与回收</li>
+<li>建立映射关系</li>
+<li>支持共享和保护</li>
+</ul>
+<p>文件系统的特点？</p>
+<ul>
+<li>友好的用户接口</li>
+<li>按名存取文件</li>
+<li>多用户&#x2F;进程共享</li>
+<li>存储大量信息</li>
+</ul>
+<p>文件的分类？</p>
+<ul>
+<li>按性质和用途<ul>
+<li>系统文件<ul>
+<li>允许通过系统调用执行</li>
+<li>不允许读写和修改</li>
+</ul>
+</li>
+<li>库文件<ul>
+<li>允许读取、执行</li>
+<li>不允许修改</li>
+</ul>
+</li>
+<li>用户文件<ul>
+<li>文件所有者及其授权用户使用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>按组织形式<ul>
+<li>普通文件</li>
+<li>目录文件</li>
+<li>特殊文件</li>
+</ul>
+</li>
+<li>逻辑结构<ul>
+<li>流式</li>
+<li>记录式</li>
+<li>树</li>
+</ul>
+</li>
+<li>物理结构<ul>
+<li>顺序（连续）</li>
+<li>串联（链接）</li>
+<li>索引</li>
+</ul>
+</li>
+<li>信息流向<ul>
+<li>输入</li>
+<li>输出</li>
+<li>输入&#x2F;输出</li>
+</ul>
+</li>
+<li>保护级别<ul>
+<li>只读</li>
+<li>读写</li>
+<li>可执行</li>
+<li>不保护</li>
+</ul>
+</li>
+</ul>
+<p>文件分类的目的？</p>
+<ul>
+<li><p>不同文件不同管理</p>
+</li>
+<li><p>提高处理速度</p>
+</li>
+<li><p>保护与共享</p>
+</li>
+</ul>
+<p>文件组织的两种观点？</p>
+<ul>
+<li>用户观点-逻辑结构-内容的组织形式</li>
+<li>实现观点-物理结构-数据的存储形式</li>
+</ul>
+<p>选取文件逻辑结构应遵循的原则？</p>
+<ul>
+<li>访问快速</li>
+<li>易于修改</li>
+<li>节约存储空间</li>
+<li>维护简单</li>
+<li>可靠性</li>
+</ul>
+<p>文件的组成？</p>
+<ul>
+<li>文件说明（文件控制块FCB）</li>
+<li>文件体</li>
+</ul>
+<p>目录项的内容？</p>
+<ul>
+<li>直接法 <ul>
+<li>目录项＝文件名＋ FCB</li>
+</ul>
+</li>
+<li>间接法 </li>
+<li>目录项＝文件名＋FCB 的地址（索引号）</li>
+</ul>
+<p>目录项的主要功能？</p>
+<ul>
+<li>文件各类属性的保存</li>
+<li>从路径名到文件物理位置的转换</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>文件的逻辑结构</th>
+<th>文件的存取方式</th>
+<th>文件的物理结构</th>
+<th>文件存储设备</th>
+<th>目录结构</th>
+<th>空闲块管理方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>字符流式的无结构文件</td>
+<td>顺序存取法</td>
+<td>连续（顺序）文件</td>
+<td>顺序存取设备（磁带）</td>
+<td>单级</td>
+<td>空闲文件目录</td>
+</tr>
+<tr>
+<td>记录式文件</td>
+<td>随机存取法（直接存取法）</td>
+<td>串联（链接）文件</td>
+<td>直接存取设备（磁盘）</td>
+<td>两级</td>
+<td>空闲块链</td>
+</tr>
+<tr>
+<td>树</td>
+<td>按键存取法</td>
+<td>索引文件</td>
+<td></td>
+<td>多级（树型）</td>
+<td>位示图</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://20040120lxs.github.io">lxs</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://20040120lxs.github.io/2024/11/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%AF%BE%E7%A8%8B%E7%AF%87%EF%BC%89%EF%BC%9A%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">https://20040120lxs.github.io/2024/11/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%AF%BE%E7%A8%8B%E7%AF%87%EF%BC%89%EF%BC%9A%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://20040120lxs.github.io" target="_blank">lxs</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/%E5%A4%B4%E5%83%8F.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/11/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%AF%BE%E7%A8%8B%E7%AF%87%EF%BC%89%EF%BC%9A%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/" title="操作系统（课程篇）：设备管理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">操作系统（课程篇）：设备管理</div></div><div class="info-2"><div class="info-item-1">...</div></div></div></a><a class="pagination-related  no-desc" href="/2024/11/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%AF%BE%E7%A8%8B%E7%AF%87%EF%BC%89%EF%BC%9A%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" title="操作系统（课程篇）：内存管理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">操作系统（课程篇）：内存管理</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/%E5%A4%B4%E5%83%8F.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">lxs</div><div class="author-info-description">From N to S</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/20040120lxs"><i class="fab fa-github"></i><span>My Github</span></a></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/29/Hexo%E9%83%A8%E7%BD%B2%E8%BD%BB%E9%87%8F%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="Hexo部署轻量云服务器">Hexo部署轻量云服务器</a><time datetime="2024-11-29T13:54:43.000Z" title="发表于 2024-11-29 21:54:43">2024-11-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%AF%BE%E7%A8%8B%E7%AF%87%EF%BC%89%EF%BC%9A%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/" title="操作系统（课程篇）：设备管理">操作系统（课程篇）：设备管理</a><time datetime="2024-11-29T12:29:26.000Z" title="发表于 2024-11-29 20:29:26">2024-11-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%AF%BE%E7%A8%8B%E7%AF%87%EF%BC%89%EF%BC%9A%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" title="操作系统（课程篇）：文件管理">操作系统（课程篇）：文件管理</a><time datetime="2024-11-29T12:29:21.000Z" title="发表于 2024-11-29 20:29:21">2024-11-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%AF%BE%E7%A8%8B%E7%AF%87%EF%BC%89%EF%BC%9A%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" title="操作系统（课程篇）：内存管理">操作系统（课程篇）：内存管理</a><time datetime="2024-11-29T12:29:10.000Z" title="发表于 2024-11-29 20:29:10">2024-11-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/11/29/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88%E8%AF%BE%E7%A8%8B%E7%AF%87%EF%BC%89%EF%BC%9A%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/" title="操作系统（课程篇）：进程管理">操作系统（课程篇）：进程管理</a><time datetime="2024-11-29T12:28:55.000Z" title="发表于 2024-11-29 20:28:55">2024-11-29</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent;"><div id="footer-wrap"><div class="copyright">&copy;2024 By lxs</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">The End</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
